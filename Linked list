@@ -1,0 +1,126 @@
+#include <stdio.h>
+#include <stdlib.h>
+struct node
+{
+    int data;
+    struct node *next;
+} *head,*temp;
+
+/Code for insertion at the Beginning/
+void insert_at_beg()
+{
+    struct node *newnode;
+    newnode=(struct node*)malloc(sizeof(struct node));
+    printf("Enter the Data ");
+    scanf("%d",&(*newnode).data);
+    newnode->next=head;
+    head=newnode;
+    
+}
+/Code for insertion at the end/
+
+void insert_at_end()
+{    
+    struct node *tail;
+    struct node *newnode;
+    newnode=(struct node*)malloc(sizeof(struct node));
+    printf("Enter the Data  ");
+    scanf("%d",&(*newnode).data);
+    newnode->next=0;
+    temp=head;
+    while(temp->next!=0)
+    {
+        temp=temp->next;
+    }
+    temp->next=newnode;
+    
+}
+
+void insert_at_pos()
+{ 
+    int i=1,pos;
+    printf("Enter the position you want to Insert  ");
+    scanf("%d",&pos);
+    struct node *newnode,*pos_node;
+    newnode=(struct node*)malloc(sizeof(struct node));
+    printf("Enter the Data  ");
+    scanf("%d",&(*newnode).data);
+    newnode->next=0;
+    pos_node=head;
+    while(i<pos-1)
+    {
+        pos_node=pos_node->next;
+    }
+    newnode->next=pos_node->next;
+    pos_node->next=newnode;
+}
+
+/Code for displaying Element/
+void display()
+{
+    temp=head;
+    while(temp!=0)
+    {
+        printf("%d  ",temp->data);
+        temp=temp->next;
+    } printf("\n");
+}
+
+int main()
+{
+    int choice=1;
+    head=0; 
+    int count=0;
+    while(choice)
+     {
+     struct node *newnode;
+     newnode=(struct node*)malloc(sizeof(struct node));
+     printf("Enter the Data ");
+     scanf("%d",&(*newnode).data);
+     newnode->next=0;
+    count++;
+     if(head==0)
+      {
+         head=temp=newnode;
+         
+      }
+      else
+      {
+         temp->next=newnode;
+         temp=newnode;
+      }
+      printf("Do you want to continue(0,1)? ");
+      scanf("%d",&choice);
+    }
+     do{ 
+    int flag = 0;
+    printf("enter 1 to insert at beginning\n");
+    printf("enter 2 to insert at end\n");
+    printf("enter 3 to at any specific position\n");
+    printf("enter 4 to display element\n");
+    printf("enter any no. to exit\n\n");
+    printf("enter the choice  ");
+    scanf("%d",&choice);
+  switch(choice)
+  {
+    case 1:insert_at_beg();
+        break;
+    case 2:insert_at_end();
+        break;
+   case 3:
+     printf("Position should be less than %d",count);
+    printf("\n");
+     insert_at_pos();
+          break;
+   case 4:display();
+        break;
+    default:
+     flag=1;
+     break;
+
+  }
+   if (flag)
+  break;
+  }while(1);
+    
+}
